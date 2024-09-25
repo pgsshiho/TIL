@@ -18,6 +18,7 @@ System.out.println(Short.MIN_VALUE);
 int arr[]; //배열선언
 arr = new int[5] // 배열 생성
 ```
+---
 ## 조건문
 if / else if / else / switch / 삼항 연산자 등이 있다 예시코드  
 **if**
@@ -62,6 +63,7 @@ switch(day){
 ```java
 String a = (b<10) ? "10보다 작다" : "10보다 크다"
 ```
+---
 ## 반복문
 c언어 기반 언어라 그런지 비슷하다  
 **for**
@@ -95,6 +97,7 @@ do{
 }while (i<10>)
 System.out.println(num);//선 실행 후 조건확인 즉 조건에 맞지 않아도 한번은 돤다
 ```
+---
 ## 클래스,인스턴스,메소드
 ### 클래스
 **공통 속성을 한 군데에 정의해 놓은 것**
@@ -137,5 +140,6 @@ class chicken{
 
 }
 ```
+---
 ## 상속
 
