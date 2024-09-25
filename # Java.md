@@ -19,7 +19,7 @@ int arr[]; //배열선언
 arr = new int[5] // 배열 생성
 ```
 ## 조건문
-if / else if / else / switch / 삼항 연산자 등이 있다 예시코드
+if / else if / else / switch / 삼항 연산자 등이 있다 예시코드  
 **if**
 ```java
 if (i>10){
@@ -63,7 +63,7 @@ switch(day){
 String a = (b<10) ? "10보다 작다" : "10보다 크다"
 ```
 ## 반복문
-c언어 기반 언어라 그런지 비슷하다
+c언어 기반 언어라 그런지 비슷하다  
 **for**
 ```java
 for (int i = 0;i<5;i++){
@@ -95,3 +95,47 @@ do{
 }while (i<10>)
 System.out.println(num);//선 실행 후 조건확인 즉 조건에 맞지 않아도 한번은 돤다
 ```
+## 클래스,인스턴스,메소드
+### 클래스
+**공통 속성을 한 군데에 정의해 놓은 것**
+예를 들자면 자동차라고 했을때 '자동차' 라는 것이 클래스
+```java
+class chicken{
+    String name;
+    int price;
+}
+public class Main{
+    public static void main(String[] args){
+        chicken.G = new chicken();//즉 이제부터 G는 chicken을 참조한다(그냥 알기쉽게 설명하면 chicken안에 있는것을 G.으로 사용 가능하다는 것)
+        G.name = "허니콤보"
+        G.price = 23000
+
+        chicken.B = new chicken();//헷갈릴수 있는데 참조한것이지 G==chicken이 아니기에 다른걸로 참조하면 다른 값도 저장이 가능하다
+        B.name = "자메이카"
+        B.price = 21500
+    }
+}
+```  
+**메소드**
+```java
+int add(int x,int y){
+    int result = x + y;
+    return result
+}//말이 메소드지 그냥 함수구나 하고 생각하면 편하다
+```
+**생성자**
+```java
+class chicken{
+    String name;
+    int price;
+
+    //생성자 우리가 자바를 쓸때 클래스를 만들고 한번더 탭누르면 나오는 그게 생성자이다
+    chicken(String name,int price){
+        this.name = name
+        this.price = price//여기서 this는 자기 자신을 나타낼때 사용한다 앞쪽 name은 필드 뒷쪽 name 은 매개변수를 뜻함
+    }
+
+}
+```
+## 상속
+
