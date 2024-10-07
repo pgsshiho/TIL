@@ -546,3 +546,44 @@ public class Main {
 //출력결과를 보시면 cities의 요소들이 하나씩 출력 될 것입니다. 
 //즉, cities.forEach(x -> System.out.println(x)); 와 같은 의미
 ```
+## 스트림
+### 정의
+**데이터의 흐름**
+컬렉션의 저장 요소를 하나씩 참조해서 람다식으로 처리할 수 있도록 해주는 반복자
+스트림을 활용해서 필터링,데이터 변경, 다른 타입이나 자료구조로 변환 등 가능
+### 특징
+데이터 소스를 변경X
+작업을 내부적으로 반복 처리
+컬렉션의 요소를 모두 읽고 나면 닫혀서 재사용이 불가 -> 필요할 경우 재생성
+### 구조
+1. 스트림생성`Stream<T> Collection.stream()`
+2. 중간 연산(데이터의 형변환 혹은 필터링, 정렬 등 스트림에 대한 가공)(map,변환/sorted,정렬/skip,스트림 자르기/limit,스트림 자르기)
+3. 최종 연산(요소를 소모해서 결과를 반환하는 단계)(collect()를 이용해서 다른 콜렉션으로 바꾸는 것, reduce를 이용해서 incremental calculation하는 것도 가장 많이 쓰이는 패턴)
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
+public class Main {
+    public static void main(String[] args) {
+        // stream을 통해 흘러들어오는 데이터를 처리해줄 수 있다.
+        // (Collection 등).stream()을 하면 stream을 생성할 수 있다.
+        List<String> list = new ArrayList<>();
+        list.add("korea");
+        list.add("japan");
+        list.add("france");
+        Stream<String> stream = list.stream();
+        // 생성된 후 부터는 해당 스트림의 요소 하나씩! iterator 처럼 돌며 연산을 해준다.
+        //map()은 요소의 상태를 변경시킬 때 사용한다.
+        stream.map(str -> {
+            //따라서 하나의 요소마다 소문자, 대문자가 출력되는 것이다!
+            System.out.println(str);
+            return str.toUpperCase();
+            // ::은 매개변수가 하나일 때 간결하게 표현해주는 방법이다.
+        }).forEach(x -> System.out.println(x));
+
+        // stream은 데이터 원본을 변경하지 않는다. 따라서 소문자 리스트가 출력된다.
+        System.out.println(list);
+    }
+}
+```
