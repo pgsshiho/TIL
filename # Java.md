@@ -438,15 +438,15 @@ public class Main {
 ```
 ## Collection 프레임워크
 **정의**
--다수의 데이터를 다루기 위한 자료구조를 표현하고 사용하는 클래스의 집합을 의미  
--데이터를 다루는데 필요한 풍부하고 다양한 클래스와 기본함수를 제공하기 때문에 유용  
--컬렉션 프레임워크의 모든 클래스는 Collection interface를 구현(implement)하는 클래스 또는 인터페이스  
+- 다수의 데이터를 다루기 위한 자료구조를 표현하고 사용하는 클래스의 집합을 의미  
+- 데이터를 다루는데 필요한 풍부하고 다양한 클래스와 기본함수를 제공하기 때문에 유용  
+- 컬렉션 프레임워크의 모든 클래스는 Collection interface를 구현(implement)하는 클래스 또는 인터페이스  
 **프레임워크 자료구조**
--List : 순서가 있는 데이터의 집합이며 데이터의 중복 허용 → ArrayList, LinkedList, Stack 등  
--Set : 순서를 유지하지 않는 데이터의 집합이며 데이터의 중복 허용X → HashSet, TreeSet 등  
--Map : 키(key)와 값(value)의 쌍으로 이루어진 데이터의 집합 순서는 유지되지 않으며 키는 중복 허용X 값은 중복 허용→ HashMap, TreeMap 등  
--Stack :마지막에 넣은 데이터를 먼저 꺼내는 자료구조LIFO(Last In First Out) → Stack, ArrayDeque 등  
--Queue :먼저 넣은 데이터를 먼저 꺼내는 자료구조입니다. FIFO(First In First Out)→ Queue, ArrayDeque 등  
+- List : 순서가 있는 데이터의 집합이며 데이터의 중복 허용 → ArrayList, LinkedList, Stack 등  
+- Set : 순서를 유지하지 않는 데이터의 집합이며 데이터의 중복 허용X → HashSet, TreeSet 등  
+- Map : 키(key)와 값(value)의 쌍으로 이루어진 데이터의 집합 순서는 유지되지 않으며 키는 중복 허용X 값은 중복 허용→ HashMap, TreeMap 등  
+- Stack :마지막에 넣은 데이터를 먼저 꺼내는 자료구조LIFO(Last In First Out) → Stack, ArrayDeque 등  
+- Queue :먼저 넣은 데이터를 먼저 꺼내는 자료구조입니다. FIFO(First In First Out)→ Queue, ArrayDeque 등  
 ## 제네릭스
 ### 정의
 다양한 타입의 객체들을 다루는 메소드나 컬렉션 클래스에 컴파일 시의 타입 체크를 해주는 기능을 의미
