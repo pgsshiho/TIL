@@ -361,3 +361,25 @@ public class Main {
     }
 }
 ```
+**try-with-resource 형식**
+(입출력과 함께 자주 쓰이는 구문, try-catch-finally구문보다 편리,알아서 close()호출)
+```java
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+
+public class Main {
+    public static void main(String[] args) {
+        //try 소괄호 안에 Closable의 인스턴스만 선언할 수 있다.
+        //만약 소괄호 안에 쓰지 않는다면 메서드에도 exception 시그니쳐를 써야하며 close()구문도 추가해야한다.
+        try (FileOutputStream out = new FileOutputStream("test.txt")){
+            out.write("Hello".getBytes());
+            out.flush();
+        }catch (IOException e){
+            System.out.println("IO Exception발생: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}
+```
