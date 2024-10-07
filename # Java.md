@@ -383,3 +383,166 @@ public class Main {
     }
 }
 ```
+## DataTime
+java.time패키지
+LocalDate와 LocalTime은 java.time 패키지의 가장 기본이 되는 클래스
+```java
+package Chap_01;
+
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Date;
+
+public class Main {
+    public static void main(String[] args) {
+
+        System.out.println("now usage");
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.now();
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        System.out.println(date);
+        System.out.println(time);
+        System.out.println(dateTime);
+
+        System.out.println("of() usage");
+        LocalDate dateOf = LocalDate.of(2021, 3, 30);
+        LocalTime timeOf = LocalTime.of(22, 50, 30);
+
+        System.out.println(dateOf);
+        System.out.println(timeOf);
+
+        //formatter를 먼저 설정한다 (FormatStyle.SHORT/MEDIUM/LONG/FULL)
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
+        //formatter.format에 시간을 넣으면 String 타입으로 리턴된다.
+        String shortFormat = formatter.format(LocalTime.now());
+        System.out.println(shortFormat);
+
+        //내가 직접 지정한 형식의 날짜를 출력할 수도 있다.
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일").withZone(ZoneId.systemDefault());
+        String myDate = myFormatter.format(new Date().toInstant());
+        System.out.println(myDate);
+
+        // 기간은 Period 클래스의 내장 메서드인 between을 사용하면 쉽게 구할 수 있다.
+        LocalDate today = LocalDate.now();
+        LocalDate birthday = LocalDate.of(1995, 2, 20);
+        Period period = Period.between(today, birthday);
+        System.out.println(period.getYears());
+        System.out.println(period.getMonths());
+        System.out.println(period.getDays());
+
+    }
+
+}
+```
+## Collection 프레임워크
+**정의**
+-다수의 데이터를 다루기 위한 자료구조를 표현하고 사용하는 클래스의 집합을 의미  
+-데이터를 다루는데 필요한 풍부하고 다양한 클래스와 기본함수를 제공하기 때문에 유용  
+-컬렉션 프레임워크의 모든 클래스는 Collection interface를 구현(implement)하는 클래스 또는 인터페이스  
+**프레임워크 자료구조**
+-List : 순서가 있는 데이터의 집합이며 데이터의 중복 허용 → ArrayList, LinkedList, Stack 등  
+-Set : 순서를 유지하지 않는 데이터의 집합이며 데이터의 중복 허용X → HashSet, TreeSet 등  
+-Map : 키(key)와 값(value)의 쌍으로 이루어진 데이터의 집합 순서는 유지되지 않으며 키는 중복 허용X 값은 중복 허용→ HashMap, TreeMap 등  
+-Stack :마지막에 넣은 데이터를 먼저 꺼내는 자료구조LIFO(Last In First Out) → Stack, ArrayDeque 등  
+-Queue :먼저 넣은 데이터를 먼저 꺼내는 자료구조입니다. FIFO(First In First Out)→ Queue, ArrayDeque 등  
+## 제네릭스
+### 정의
+다양한 타입의 객체들을 다루는 메소드나 컬렉션 클래스에 컴파일 시의 타입 체크를 해주는 기능을 의미
+**사용이유**
+객체의 타입을 컴파일 시에 체크하기 때문에 안정성이 높아짐
+```java
+public class 클래스명<T> {...}
+public interface 인터페이스명<T> {...}
+
+//자주 사용되는 타입인자 약어
+
+<T> == Type
+<E> == Element
+<K> == Key
+<V> == Value
+<N> == Number
+<R> == Result
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+
+        //List와 ArrayList의 Docs에서 get()을 보면
+        //List에는 함수의 body가 없으나 ArrayList에는 있음!
+        List<String> list = new ArrayList();
+        list.add("String");
+
+        // Collection docs로 가면 <E>가 선언되어있다.
+        // <E>는 어떤 타입이든 올 수 있고, 원소를 뜻한다.
+        // 해당 <>가 아닌 경우에는 앞에 <다른타입>을 지정한 뒤 사용한다 (toArray 참고)
+        // <?>는 클래스 선언부에 쓰인 타입이 아니어도 괜찮다는 뜻이다.
+        Collection<String> collection = list;
+
+        List<Exception> exceptionList = new ArrayList<>();
+        Collection<Exception> exceptionCollection = exceptionList;
+
+        List<IllegalArgumentException> exceptions = new ArrayList<>();
+        // 아래 주석을 풀면 addAll(Collection<? extends E> c)의 기능이 나옴!
+        //exceptionCollection.addAll(list) -> Exception을 exepect하나 String이 들어왔다고 오류남
+        exceptionCollection.addAll(exceptions);
+
+    }
+}
+```
+## 람다
+### 정의
+식별자 없이 실행 가능한 함수
+### 특징
+-람다식이 코드를 보다 간결하게 만들어주는 역할
+-람다를 사용하여서 만든 익명 함수는 재사용이 불가능
+-람다만을 사용할 경우 비슷한 메소드를 중복되게 생성할 가능성이 있으므로 지저분해질 수 있음
+```java
+//[기존의 메소드 형식]
+반환타입 메소드이름(매개변수 선언) {
+    수행 코드 블록
+}
+
+//[람다식의 형식]
+반환타입 메소드이름(매개변수 선언) -> {
+    수행 코드 블록
+}
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Stream;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("Korea");
+        list.add("Japan");
+        list.add("France");
+        Stream<String> stream = list.stream();
+        // map() 은 앞의 값을 어떤 값으로 변경할 때 사용한다.
+        // 아래에서 str은 람다식에서 쓰일 매개변수명이며 여기에선 stream을 받아온다.
+        // 람다에서 중괄호를 사용하면 return이 필요하다.
+        stream.map(str -> {
+            System.out.println(str);
+            return str.toUpperCase();
+        // ::은 매개변수가 하나일 때 간결하게 표현해주는 방법이다.
+        }).forEach(System.out::println);
+    }
+}
+
+// :: 연산자
+public class Main {
+    public static void main(String[] args) {
+        List<String> cities = Arrays.asList("서울", "부산", "속초", "수원", "대구");
+        cities.forEach(System.out::println);
+    }
+}
+//이중 콜론 연산자는 매개변수를 중복해서 사용하고 싶지 않을 때 사용하곤 합니다. 
+//출력결과를 보시면 cities의 요소들이 하나씩 출력 될 것입니다. 
+//즉, cities.forEach(x -> System.out.println(x)); 와 같은 의미
+```
