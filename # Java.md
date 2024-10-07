@@ -150,7 +150,178 @@ class chicken{}
 class BBQ extends chicken{}
 class BHC extends chicken{}
 ```  
-**super,super()메소드**
+### super,super()메소드
 부모 클래스로부터 상속받은 필드,메소드,생성자를 자식 클래스에서 참조하여 사용을 원할때 사용하는 키워드  
-  
+### this, this()메소드와의 차이
+this()는 같은 클래스의 다른 생성자
+super()부모클래스의 생성자
+그래서 super()의 매개변수 자리에 부모 클래스 생성자의 매개 변수와 같게 들어가야한다
+### 오버로딩과 오버라이딩
+**오버로딩**
+한 클래스 내에 동일한 이름의 메소드를 여러개 정의하는것
+모두 같아야만 한다
+```java
+int add(int x, int y, int z) {
+    int result = x + y + z;
+    return result;
+}
+long add(int a, int b, long c) {
+    long result = a + b + c;
+    return result;
+}
+int add(int a, int b) {
+    int result = a + b;
+    return result;
+}
+```
+**오버라이딩**
+부모 클래스로부터 상속받은 메소드의 내용을 변경하는 것
+단 메소드,이름.매개변수,반환타입이 모두 같아야한다
+```java
+class Animal {
+    String name;
+    String color;
 
+    public void cry() {
+        System.out.println(name + " is crying.");
+    }
+}
+
+class Dog extends Animal {
+    Dog(String name) {
+        this.name = name;
+    }
+    @Override
+    public void cry() {
+        System.out.println(name + " is barking!");
+    }
+    public void swim() {
+        System.out.println(name + " is swimming.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal dog = new Dog("코코");
+
+        dog.cry();
+    }
+}
+```  
+---
+## 접근 제어자
+- private : 같은 클래스 내에서만 접근가능
+- default(nothing) : 같은 패키지 내에서만 접근가능
+- protected : 같은 패키지 내,다른 패키지의 자손클래스에서 접근 가능
+- public : 접근 제한이 전혀 없음
+  접근 제어자로 제어하는 것 == 캡슐화
+---
+## 추상클래스
+- 추상메소드를 선언할 수 있는 클래스
+- 상속받는 클래스 없이 그 자체로 인스턴스를 생성 불가능
+- 설계만 되어있음
+- 수행되는 코드에 대해서는 작성이 안된 메소드
+- 
+```java
+// 추상 클래스 정의
+abstract class Animal {
+    // 추상 메서드 (구현이 없음)
+    public abstract void sound();
+
+    // 일반 메서드 (구현이 있음)
+    public void sleep() {
+        System.out.println("동물이 잠을 잡니다.");
+    }
+}
+
+// 추상 클래스를 상속받은 자식 클래스
+class Dog extends Animal {
+    // 추상 메서드 구현
+    public void sound() {
+        System.out.println("멍멍");
+    }
+}
+
+class Cat extends Animal {
+    // 추상 메서드 구현
+    public void sound() {
+        System.out.println("야옹");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Animal 클래스는 추상 클래스이므로 직접 인스턴스화 할 수 없음
+        // Animal animal = new Animal(); // 오류 발생!
+
+        // 추상 클래스를 상속받은 자식 클래스를 인스턴스화
+        Animal dog = new Dog();
+        dog.sound();  // "멍멍" 출력
+        dog.sleep();  // "동물이 잠을 잡니다." 출력
+
+        Animal cat = new Cat();
+        cat.sound();  // "야옹" 출력
+        cat.sleep();  // "동물이 잠을 잡니다." 출력
+    }
+}
+```
+## 인터페이스
+**단일 책임, 리스코프 치환, 의존성 역전 원칙을 따르도록 도와주는 중요한 개념**
+```
+정의가능
+- 접근제어자
+- 리턴타입
+- 메소드 이름
+```
+함수내용 존재X  
+형식  
+```
+interface 인터페이스명{ public abstract void 추상메서드명(); }
+```
+예시  
+```java
+interface Flyable{
+    // 인터페이스는 멤버를 가지지 못하고, 동작(메서드)만 정의할 수 있다.
+    // 또한 정의한 메서드는 내용을 가질 수 없다
+    void fly(int x, int y, int z);
+}
+// 인터페이스는 다중 상속(implements)할 수 있다.
+class Pigeon implements Flyable{
+    private int x, y, z;
+    @Override
+    public void fly(int x, int y, int z) {
+        printLocation();
+        System.out.println("날아갑니다.");
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        printLocation();
+    }
+
+    public void printLocation(){
+        System.out.println("현재 위치 (" + x + ", " + y + ", " + z + ")");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Flyable pigeon = new Pigeon();
+        pigeon.fly(1,2,3);
+
+    }
+}
+```
+### 추상 클래스와 차이점
+**인터페이스**
+- 인터페이스는 모든 메소드가 추상메소드 이다
+- 구현하려는 객체의 동작의 명세
+- 다중 상속 가능
+- implements를 이용하여 구현
+- 메소드 시그니처(이름, 파라미터, 리턴 타입)에 대한 선언만 가능
+- 같은 이름의 메서드가 클래스에 따라 다르게 동작하도록 구현되는 것을 말하는 다형성을 지님
+**추상 클래스**
+- 클래스를 상속받아 이용 및 확장을 위함
+- 다중 상속 불가능, 단일 상속
+- ectends를 이용하여 구현
+- 추상메소드에 대한 구현 가능
+- 추상 클래스의 기능을 재사용, 확장가능 측면에서 상속성을 지님
+- 
