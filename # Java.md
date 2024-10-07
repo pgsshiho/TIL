@@ -336,5 +336,4 @@ public class Main {
 필요한 것으로 표현할 수 없거나 구체적인 목적을 가진 예외를 정의한다면
 Throwable 또는 그 하위에 있는 예외 클래스를 상속받아서 자신만의 예외 클래스를 정의가능
 ```
-![예외](C:\Users\user\Desktop\예외.png)
-
+![예외](https://media.vlpt.us/images/codepark_kr/post/a70025be-d97d-4ba4-81de-bf9b8fe48d2b/ExceptionClassHierarchy.png)
