@@ -587,3 +587,103 @@ public class Main {
     }
 }
 ```
+## 어노테이션
+### 정의
+ 코드 사이에 특별한 의미, 기능을 수행하도록 하는 기술
+### 종류
+- 표준 어노테이션 : 자바가 기본적으로 제공하는 어노테이션
+- 메타 어노테이션 : 어노테이션을 위한 어노테이션
+- 사용자정의 어노테이션 : 사용자가 직접 정의하는 어노테이션
+### 표준 어노테이션
+1. @Override
+2. @Deprecated
+3. @SuppressWarnings
+**@Override**  
+Override는 오버라이딩할 때 메서드의 이름을 잘못적는 실수를 방지
+```java
+class Parent{
+	void parentMethod(){}
+}
+
+class Child extends Parent{
+	@Override
+    void pparentmethod(){} // 컴파일 에러! 잘못된 오버라이드 스펠링 틀림
+```
+#### @Deprecated
+앞으로 사용하지 않을 것을 권장하는 필드나 메서드에 붙임
+```Java
+@Deprecated
+public int getDate(){
+	return normalize().getDayOfMonth();
+}
+```
+없애지 않는 이유는 하위 호환성을 중요하게 여거 없어지면 오류가 날수도 있기때문
+상황에 따라 굳이 이 어노테이션을 사용하지않고 추상메서드로 해도 괜찮다
+#### @Functionalinterface
+함수형 인터페이스에 붙이면, 컴파일러가 올바르게 작성 됬는지 체크
+'하나의 추상메서드만 가져야 한다는 제약'을 확인
+#### @SuppressWarnings
+컴파일러의 경고메세지가 나타나지 않게함
+```java
+@SuppressWarnings("unchecked")
+ArrayList list = new ArrayList(); // 제네릭 타입을 지정하지 않음!
+list.add(obj); // 경고 발생 !!! 경고 내용 = unchecked
+```
+### 메타 어노테이션
+#### Target
+어노테이션을 정의할 때 적용대상을 지정하는데 사용
+```Java
+@Target({TYPE, FIELD, TYPE_USE})
+@Retention(RetentionPolicy.SOURCE)
+public @interface MyAnnotation{}
+
+@MyAnnotation // 적용 대상이 Type(클래스, 인터페이스)
+class MyClass{
+	@MyAnnotation //적용 대상이 FIELD인 경우
+    int i;
+    
+    @MyAnnotation //적용 대상이 TYPE_USE인 경우
+    MyClass mc;
+}
+```
+#### @Retention
+**SOURCE** : 소스 파일에만 존재 **컴파일 시점까지 유지**
+**RUNTIME** : 클래스 파일에 존재. 실행시 사용가능 **컴파일 후에도 유지**
+**CLASS** : **컴파일 시점 이후에도 유지 하지만 런타입 중에는 읽지않음**
+```java
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.SOURCE)
+public @interface Override{} 
+```
+#### Documented
+**javadoc으로 작성한 문서**에 포함시키려면 해당 어노테이션을 붙임
+#### @Inherited
+어노테이션도 상속이 가능하다. 어노테이션을 자손 클래스에 상속하고자 할 때, @Inherited를 붙임
+```java
+@Inherited
+@interface SuperAnno{}
+
+@SuperAnno
+class Parent{}
+
+// <- 여기에 @SuperAnno 가 붙은 것으로 인식
+class Child extends Parent{}
+```
+#### @Repeatable
+반복해서 붙일 수 있는 어노테이션을 정의할 때 사용
+```java
+@Repeatable(ToDos.class)
+@interface ToDo{
+	String value();
+}
+
+@ToDo("delete test codes.")
+@ToDo("override inherited methods")
+class MyClass{
+	~~
+}
+
+@interface ToDos{
+	ToDo[] value();
+}
+```
