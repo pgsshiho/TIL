@@ -12,13 +12,24 @@ System.out.println(Short.MAX_VALUE);
 System.out.println(Short.MIN_VALUE);
 ```  
 ### 참조자료형
-참조자료형은 위 **기본 자료형을 제외한 모든 자료형**을 뜻한다
+참조자료형은 위 **기본 자료형을 기초로한 자료형**을 뜻한다  
+'class','interface','Enum'또한 참조 자료형이다  
+'class'과'Enum'은'object' 클래스의 상속  
+하지만 **'interface'**는 상속하지 않음  
+#### Wrapper 클래스
+**기본 자료형을 감싼 클래스**  
+기본 자료형을 감싸면 얻는 이점 -> 유용한 메소드를 제공,제네릭  
+제네릭에서 받는 매게변수'T'는 object 자료형만 얻을 수 있음  
 밑에는 참조 자료형의 예시 코드이다
 ```java
 int arr[]; //배열선언
 arr = new int[5] // 배열 생성
 ```  
 ---
+### 참조자료형과 기본자료형의 차이
+- 참조 자료형은 기본 자료형과 달리 메소드를 가질 수 있다.
+- 참조 자료형의 기본 값은 NULL이다.
+  
 ## 조건문
 if / else if / else / switch / 삼항 연산자 등이 있다 예시코드  
 **if**
