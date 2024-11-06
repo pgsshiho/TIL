@@ -36,7 +36,7 @@ REST 아키택처의 조건을 준수하는 어플리케이션 프로그래밍 �
 REST 기반으로 시스템을 분산하여 **확장성과 재사용성을 높임**
 HTTP 표준을 따르고 있어 **여러 프로그래밍 언어로 구현가능**
 ## REST API의 설계규칙
-1. 웹 기반의 REST API를 설계할 경우 URI를 통해** 자원을 표현**해야함
+1. 웹 기반의 REST API를 설계할 경우 URI를 통해**자원을 표현**해야함
    ```
    https://thinkground.studio/member/589  
    Resource : member  
@@ -46,9 +46,25 @@ HTTP 표준을 따르고 있어 **여러 프로그래밍 언어로 구현가능*
    ```
    URI에 행위가 들어가면 안됨  
    HEADER를 통해 CRUD를 표현하여 동작을 요청해야 함  
-3. 메세지를 통한 리소스 제작  
+3. **메세지를 통한 리소스 제작**  
    ```
    HEADER를 통해 content-type을 지정하여 데이터를 전달  
    대표적 형식으로는 HTML,XML,JSON,TEXT가 있음  
    ```
-
+4. **HTTP 상태 코드 사용**
+   상태 코드는
+   [HTTP](https://www.notion.so/eb585cebbc1b4f6ba153351ae264bf4b)
+   여기에 HTTP에 있음
+5. HATEOAS(Hypermedia as the Engine of Application State)
+   응답 본문에 하이퍼링크를 포함하여 자원 간의 관계를 명시
+6. 버전 관리
+   API 버전 관리를 통해 변경 사항을 효율적으로 관리하고, 기존 클라이언트가 서비스에 영향을 받지 않도록 해야함
+7. 보안 및 인증
+   HTTPS를 사용하여 전송 데이터의 보안을 보장.
+## REST API의 설계 원칙
+1. 슬래시 구분자(/)는 계층 관계를 나타내는데 사용
+2. URI 마지막 문자로 슬래시(/)를 포함X
+3. 하이픈(-)은 URI 가독성을 높이는데 사용할 수는 있음
+4. 언더바(_)는 URI에 사용X
+5. URI 경로에는 소문자를 사용
+6. 파일 확장자는 URI에 포함X
