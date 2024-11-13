@@ -729,3 +729,39 @@ class MyClass{
 2. 불변 객체를 생성할 때
 3.  코드 가독성 및 유지보수성 향상
 4.  메서드 체이닝으로 직관적인 설정 가능
+메서드 체이닝:여러 메서드를 연속해서 호출할 수 있도록 하는 패턴
+```Java
+class Calculator {
+    constructor(value = 0) {
+        this.value = value;
+    }
+
+    add(num) {
+        this.value += num;
+        return this; // 현재 객체를 반환
+    }
+
+    subtract(num) {
+        this.value -= num;
+        return this;
+    }
+
+    multiply(num) {
+        this.value *= num;
+        return this;
+    }
+
+    getResult() {
+        return this.value;
+    }
+}
+
+// 메서드 체이닝 사용
+const result = new Calculator()
+    .add(10)
+    .subtract(5)
+    .multiply(3)
+    .getResult();
+
+console.log(result);  // 출력: 15
+```
