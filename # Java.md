@@ -698,13 +698,26 @@ class MyClass{
 	ToDo[] value();
 }
 ```
-### Lombok에서 자주 사용되는 어노테이션
-@Getter : 접근자 자동생성
-@Setter : 설정자 자동생성
-@NoArgsConstructor : 파라미터가 없는 기본 생성자
-@AllArgsConstructor : 모든 필드 값을 파라미터로 받는 생성자
-@RequiredArgsConstructor : final, @NonNull인 필드 값만 파라미터로 받는 생성자
-@Builder : 빌더 패턴을 사용할 수 있도록 코드를 생성
+## Lombok
+### 정의
+어노테이션 기반으로 **코드를 자동완성 해주는 라이브러리**
+### 장점
+1. 어노테이션 기반의 코드 자동 생성을 통한 생산성 향상
+2. 반복되는 코드 다이어트를 통한 가독성 및 유지보수성 향상
+3. Getter, Setter 외에 빌드 패턴이나 로그 생성 등 다양한 방면으로 활용 가능
+### 기능
+1. @Getter @Setter : 클래스 이름위에 적용 시키면 모든 변수들에 적용이 된다
+2. @AllArgsConstructor : 모든 변수를 사용하는 생성자를 자동완성 시켜주는 어노테이션
+3. @NoArgsConstructor : 어떠한 변수도 사용하지 않는 기본 생성자를 자동완성 시켜주는 어노테이션
+4. @RequiredArgsConstructor : 특정 변수만을 활용하는 생성자를 자동완성 시켜주는 어노테이션
+5. @EqualsAndHashCode :  클래스에 대한 equals 함수와 hashCode 함수를 자동으로 생성
+6. @ToString : 클래스의 변수들을 기반으로 ToString 메소드를 자동으로 완성(출력을 원하지 않는 변수에 @ToString.Exclude 어노테이션을 붙여주면 출력을 제외)
+7. @Data : @ToString, @EqualsAndHashCode, @Getter, @Setter, @RequiredArgsConstructor를 자동완성(실무에서는 무겁+객체의 안정성을 위해 지양함)
+8. @Builder : 해당 클래스의 객체의 생성에 Builder패턴을 적용
+9. @Delegate :  한 객체의 메소드를 다른 객체로 위임
+10. @Log : 해당 클래스의 로그 클래스를 자동 완성
+
+  
 ### @Setter 과 Builder
 1. @Setter은 객체 내부상태를 외부에서 쉽게 변경가능하기 때문에 남발을 하게된다면 캡슐화의 원칙이 깨진다.
 2. 불변 객체로 설계할 수 있는 객체조차 불필요하게 가변 객체가 되며프로그램의 안정성을 떨어뜨릴 수 있디.
