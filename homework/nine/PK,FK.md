@@ -23,5 +23,57 @@
 ### DB 는 무조건 다(N)쪽이 외래 키를 갖는다
 - 연관관계의 주인 O : 두 객체 사이에서 '조회, 저장, 수정, 삭제' 가능
 - 연관관계의 주인 X : '조회'만 가능
-## Spring 에서 적용
+## Spring 에서 기본 키 적용
+### JPAd에서 기본 키 설정
+- @id 어노테이션: 엔티티 클래스에서 기본 키를 설정할 때 사용
+- @GeneratedValue: 기본 키 값이 자동 생성되도록 설정. 이 때 전략을 지정 가능
+```java
+@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT
+    private Long id;
 
+    private String name;
+}
+```
+### 기본 키 생성 전략
+- GenerationType.AUTO: 데이터베이스의 기본 설정을 따름
+- GenerationType.IDENTITY: 데이터베이스의 AUTO_INCREMENT 기능 사용
+- GenerationType.SEQUENCE: 데이터베이스 시퀀스를 사용
+- GenerationType.TABLE: 별도의 키 생성 테이블을 사용
+### 복합 키 설정
+- @IdClass: 기본 키가 복합적인 경우 별도의 클래스에 복합 키 정의
+- @EmbeddedId: 내장 객체를 사용하여 복합 키를 정의
+## Spring에서 외래 키 적용
+### JPA에서 외래 키 설정
+- @ManyToOne: 다대일 관계에서 외래 키를 설정
+- @OneToMany: 일대다 관계를 설정 (실제로 FK는 Many 측에 위치)
+- @JoinColumn: 외래 키 열의 이름을 명시적으로 설정
+```java
+@Entity
+public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id") // FK가 매핑될 열
+    private User user;
+}
+```
+### 관계 설정의 방향
+- 양방향 관계: @OneToMany와 @ManyToOne을 모두 설정
+- 단방향 관계: 한쪽에서만 외래 키를 참조
+### Cascade 옵션
+- CascadeType.ALL: 엔티티 상태 변화(삽입, 수정, 삭제)가 관계된 엔티티에도 전파.
+- CascadeType.PERSIST: 저장만 전파.
+- CascadeType.REMOVE: 삭제만 전파.
+```java
+@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+private List<Order> orders;
+```
+### 연관 관계의 주인 설정
+- mappedBy를 사용하여 주인을 명시.
+- 연관 관계의 주인만 데이터베이스 변경을 처리.
+## Spring Boot 데이터베이스 무결성 및 검증
