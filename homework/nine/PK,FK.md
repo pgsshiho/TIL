@@ -76,4 +76,3 @@ private List<Order> orders;
 ### 연관 관계의 주인 설정
 - mappedBy를 사용하여 주인을 명시.
 - 연관 관계의 주인만 데이터베이스 변경을 처리.
-## Spring Boot 데이터베이스 무결성 및 검증
