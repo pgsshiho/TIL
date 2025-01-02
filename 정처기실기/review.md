@@ -102,3 +102,7 @@ main()
 ## 구체화
 하위 수준 그룹이 상위 수준 그룹의 **추상화 부분을 구체화** 시키는 것을 의미
 # 프로그래밍 언어 특성
+## 발전과정
+|1960년 이전|1960년대|1970년대|1980년대|1980년 이후|
+|----------|-------|---------|-------|----------|
+|ASSEMBLY,FORTRAN,LISP|COBOL,PL/I,BASIC|PASCAL,C,SMALLTALK,PROLOG|ADA,C++,PYTHON,PROLOG|,RUBY,JAVA,JAVASCRIPT,C#|
