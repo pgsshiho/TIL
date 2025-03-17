@@ -8,3 +8,8 @@ quiero ir a casa
 Ich möchte nach Hause gehen  
 أريد العودة إلى المنزل  
 ฉันอยากกลับบ้าน
+# 씨발
+씨발  
+fuck  
+くそ  
+他妈的  
